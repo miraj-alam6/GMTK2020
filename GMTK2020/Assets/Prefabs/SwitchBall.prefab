@@ -49,7 +49,9 @@ MonoBehaviour:
   TimeBufferToSpawnAgain: 2
   TimeUntilSpawnAgainLeft: 0
   MaxSpeed: 8
-  HitsLeft: 5
+  StartDead: 0
+  MaxHealth: 5
+  Health: 0
   JustGotHit: 0
   CooldownOnDamageInflict: 0.1
   MyColor: 0

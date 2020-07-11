@@ -10,12 +10,19 @@ public class ScoreBall : Ball
 
 
 
-    public void ChangeColor(Paddle paddleThatHitMe) {
+    public void ChangeColor(Paddle paddleThatHitMe) { 
         if (paddleThatHitMe.GetTeamColor() != _MyColor) {
-            _MyColor = paddleThatHitMe.GetTeamColor();
-            _MySpriteRenderer.color = StaticFunctions.GetUnityColor(_MyColor);
+            ChangeColor(paddleThatHitMe.GetTeamColor());
         }
     }
+
+    public void ChangeColor(TeamColor color) {
+        if (color != _MyColor) {
+            _MyColor = color;
+            _MySpriteRenderer.color = StaticFunctions.GetUnityColor(color);
+        }
+    }
+
 
 
     protected override void Awake() {

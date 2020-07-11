@@ -12,6 +12,8 @@ public class GameController : MonoBehaviour{
 
     public bool DEBUG_TESTING_STUFF;
     public Paddle DEBUG_PADDLE_THAT_BROKE_BALL;
+
+    public BallSpawner[] BallSpawners;
     private void Update() {
 
         if (DEBUG_TESTING_STUFF) {
@@ -51,6 +53,24 @@ public class GameController : MonoBehaviour{
 
     public Team[] GetAllTeams() {
         return Teams;
+    }
+
+    public void SpawnAScoreBall(ScoreBall ball) {        
+        int selector = Random.Range(0, 3);
+        TeamColor randomColor = (TeamColor)selector;
+        ball.ChangeColor(randomColor);
+        SpawnABall(ball);
+    }
+
+    public void SpawnASwitchBall(SwitchBall ball) {
+        SpawnABall(ball);
+    }
+
+    public void SpawnABall(Ball ball) {
+        if (BallSpawners.Length > 0) {
+            var randomBallSpawner = BallSpawners[Random.Range(0, BallSpawners.Length)];
+            randomBallSpawner.SpawnABall(ball);
+        }
     }
 
     public Team[] GetAllTeamsExceptTarget(Paddle paddleOfTeamToExclude) {
