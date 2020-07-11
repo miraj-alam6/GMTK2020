@@ -8,6 +8,7 @@ TagManager:
   - SwitchBall
   - Paddle
   - Goal
+  - Environment
   layers:
   - Default
   - TransparentFX
