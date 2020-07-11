@@ -6,15 +6,17 @@ using UnityEngine;
 public class Paddle : MonoBehaviour{
     [SerializeField]
     private TeamColor _MyTeam;
-    public float MovementSpeed;
     private SpriteRenderer _MySpriteRenderer;
-
+    public float Speed;
+    private Rigidbody2D _RB2D;
     private void Awake() {
         _MySpriteRenderer = GetComponentInChildren<SpriteRenderer>();
         _MySpriteRenderer.color = StaticFunctions.GetUnityColor(_MyTeam);
+        _RB2D = GetComponent<Rigidbody2D>();
     }
     public void ProcessMoveInput(Vector2 inputVector) {
         Debug.Log("If movement was implemented, this would be the input vector:"+inputVector);
+        _RB2D.velocity = Speed * inputVector;
     }
 
     public TeamColor GetTeamColor() {
