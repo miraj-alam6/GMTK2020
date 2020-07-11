@@ -2195,6 +2195,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SwitchBall
       objectReference: {fileID: 0}
+    - target: {fileID: 6297368835273148007, guid: 71910a2cde7e6c24fbecf7b7b8dc81fe,
+        type: 3}
+      propertyPath: HitsLeft
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 71910a2cde7e6c24fbecf7b7b8dc81fe, type: 3}
 --- !u!1001 &6388290092746743542

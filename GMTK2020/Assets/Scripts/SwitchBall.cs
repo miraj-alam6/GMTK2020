@@ -3,22 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class SwitchBall : Ball {
-    public int HitsLeft;
+    public int MaxHealth = 5;
+    public int Health;
+    public bool JustGotHit;
     public float CooldownOnDamageInflict = 0.1f;
     private float CooldownOnDamageInflictLeft;
     //This field might not be used based on the design
     public TeamColor MyColor;
     private void Awake() {
         base.Awake();
+        Health = MaxHealth;
         CooldownOnDamageInflictLeft = 0f;
     }
 
 
     public void InflictDamage(Paddle damageInflicter) {
         if (CooldownOnDamageInflictLeft <= 0) {
-            HitsLeft--;
+            Health--;
             CooldownOnDamageInflictLeft = CooldownOnDamageInflict;
-            if (HitsLeft == 0) {
+            if (Health == 0) {
                 //The two methods exist just so we can test either case with iteration if necessary
                 ExplodeAndChangeTwoPaddles(damageInflicter);
                 //ExplodeAndChangeOnePaddle(1, damageInflicter);
@@ -62,6 +65,7 @@ public class SwitchBall : Ball {
 
     public void ExplodeAndChangeOnePaddle(Paddle damageInflicter) {
         Explode();
+        _MySpriteRenderer.enabled = false;
         var otherTeams = GameController.Instance.GetAllTeamsExceptTarget(damageInflicter);
     }
 
@@ -97,6 +101,7 @@ public class SwitchBall : Ball {
 
     private void Explode() {
         Die();
+        Health = MaxHealth;
        //TODO Particle effects
     }
 
@@ -110,8 +115,15 @@ public class SwitchBall : Ball {
     protected override void Update() {
         base.Update();
         if (CooldownOnDamageInflictLeft > 0) {
-            CooldownOnDamageInflict -= Time.deltaTime;
+            CooldownOnDamageInflictLeft -= Time.deltaTime;
         }
 
+    }
+
+    protected void OnCollisionEnter2D(Collision2D collision) {
+        if (collision.collider.tag.Equals(Constants.PADDLE_TAG)) {
+            var whoHitMe = collision.collider.GetComponent<Paddle>();
+            InflictDamage(whoHitMe);
+        }
     }
 }

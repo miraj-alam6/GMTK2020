@@ -48,8 +48,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TimeBufferToSpawnAgain: 2
   TimeUntilSpawnAgainLeft: 0
-  MaxSpeed: 10
-  HitsLeft: 1
+  MaxSpeed: 8
+  HitsLeft: 5
+  JustGotHit: 0
   CooldownOnDamageInflict: 0.1
   MyColor: 0
 --- !u!58 &5718107345456629441
