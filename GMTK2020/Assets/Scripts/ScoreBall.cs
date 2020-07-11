@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class ScoreBall : Ball
 {
-    private GameColor _MyColor;
+    private TeamColor _MyColor;
 
     public void ChangeColor(Paddle paddleThatHitMe) {
-        _MyColor = paddleThatHitMe.MyTeam;
+        _MyColor = paddleThatHitMe.GetTeamColor();
         Debug.Log("Just changed my color BRAH");
     }
 
@@ -27,14 +27,15 @@ public class ScoreBall : Ball
         if (collision.tag.Equals(Constants.GOAL_TAG)) {
             Goal goalComponent = collision.GetComponent<Goal>();
             if (goalComponent!= null && goalComponent.MyColor != _MyColor) {
-                if (goalComponent.MyColor != _MyColor) {
-                    var teamThatScored = GameController.Instance.GetSpecificTeam(_MyColor);
-                    var otherTeams = GameController.Instance.GetAllTeamsExceptTarget(_MyColor);
-                    teamThatScored.AddAPoint(otherTeams);
+                var teamOfBall = GameController.Instance.GetSpecificTeam(_MyColor);
+                if (goalComponent.MyColor == _MyColor) {
+                    teamOfBall.RemoveAPoint();
                 }
-
+                else {
+                    var otherTeams = GameController.Instance.GetAllTeamsExceptTarget(_MyColor);
+                    teamOfBall.AddAPoint(otherTeams);
+                }
             }
-
         }
     }
 }

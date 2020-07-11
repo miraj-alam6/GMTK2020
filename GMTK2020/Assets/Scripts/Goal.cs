@@ -3,5 +3,5 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Goal : MonoBehaviour{
-    public GameColor MyColor;    
+    public TeamColor MyColor;    
 }
