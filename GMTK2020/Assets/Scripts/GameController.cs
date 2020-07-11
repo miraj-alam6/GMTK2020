@@ -1,16 +1,29 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour{
-    Team[] Teams;
+    public Team[] Teams;
     
     public static GameController Instance;
     public ScoreBall TheScoreBall;
     public SwitchBall TheSwitchBall;
 
+    public bool DEBUG_TESTING_STUFF;
+    public Paddle DEBUG_PADDLE_THAT_BROKE_BALL;
     private void Update() {
 
+        if (DEBUG_TESTING_STUFF) {
+            //Switch paddles hot key
+            if (Input.GetKeyDown(KeyCode.C)) {
+                TheSwitchBall.ExplodeAndChangeTwoPaddles(DEBUG_PADDLE_THAT_BROKE_BALL);
+            }
+            //Reset hot key
+            if (Input.GetKeyDown(KeyCode.R)) {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
+            }
+        }
     }
     private void Awake() {
         Instance = this;
@@ -54,6 +67,5 @@ public class GameController : MonoBehaviour{
             }
         }
         return teamArray;
-    }
-
+    }   
 }

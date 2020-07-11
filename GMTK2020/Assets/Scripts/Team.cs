@@ -37,6 +37,7 @@ public class Team : MonoBehaviour{
     }
 
     public int GetIndexInTeam(Paddle paddle) {
+        Debug.Log("Getting index for" +paddle.name +" in " + MyTeamType.ToString() + " team");
         for (int i=0; i< Paddles.Length; i++) {
             if (Paddles[i] == paddle) {
                 return i;

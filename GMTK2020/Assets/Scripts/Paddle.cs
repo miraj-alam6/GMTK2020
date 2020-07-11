@@ -7,6 +7,12 @@ public class Paddle : MonoBehaviour{
     [SerializeField]
     private TeamColor _MyTeam;
     public float MovementSpeed;
+    private SpriteRenderer _MySpriteRenderer;
+
+    private void Awake() {
+        _MySpriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        _MySpriteRenderer.color = StaticFunctions.GetUnityColor(_MyTeam);
+    }
     public void ProcessMoveInput(Vector2 inputVector) {
         Debug.Log("If movement was implemented, this would be the input vector:"+inputVector);
     }
@@ -15,9 +21,14 @@ public class Paddle : MonoBehaviour{
         return _MyTeam;
     }
 
-    public void ChangeTeamColor(TeamColor color) {
-        _MyTeam = color;
-        //TODO Update visuals to the new color. 
+    public void ChangeTeamColor(TeamColor teamColor) {
+        _MyTeam = teamColor;
+
+        Color unityColor = StaticFunctions.GetUnityColor(teamColor);
+        _MySpriteRenderer.color = unityColor;
+
+        //TODO need more juice for update. 
+
     }
 
 }

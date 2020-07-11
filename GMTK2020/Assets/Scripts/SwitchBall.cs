@@ -73,7 +73,7 @@ public class SwitchBall : Ball {
             var paddleTeam = GameController.Instance.GetSpecificTeam(paddle);
             var otherPaddleTeam = GameController.Instance.GetSpecificTeam(otherPaddleInTheSwap);
             int indexInPaddleTeam = paddleTeam.GetIndexInTeam(paddle);
-            int indexInOtherPaddleTeam = paddleTeam.GetIndexInTeam(paddle);
+            int indexInOtherPaddleTeam = otherPaddleTeam.GetIndexInTeam(otherPaddleInTheSwap);
             if (indexInPaddleTeam < 0 || indexInOtherPaddleTeam < 0) {
                 Debug.LogError("Swapping won't work because a paddle index in a team was not able to be found");
                 return;
