@@ -7,8 +7,13 @@ public class GameUI : MonoBehaviour
 {
 
     public TMP_Text Team1Label;
-   // public Team1Score
+    public TMP_Text Team1Score;
 
+    public TMP_Text Team2Label;
+    public TMP_Text Team2Score;
+    
+    public TMP_Text Team3Label;
+    public TMP_Text Team3Score;
 
     // Start is called before the first frame update
     void Start()
