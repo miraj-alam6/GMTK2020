@@ -114,14 +114,14 @@ namespace TMPro.Examples
                 Vector3 topRight = m_Transform.TransformPoint(cInfo.topRight);
                 Vector3 bottomRight = m_Transform.TransformPoint(new Vector3(cInfo.bottomRight.x, cInfo.bottomRight.y, 0));
 
-                Color color = cInfo.isVisible ? Color.yellow : Color.grey;
+                UnityEngine.Color color = cInfo.isVisible ? UnityEngine.Color.yellow : UnityEngine.Color.grey;
                 DrawRectangle(bottomLeft, topLeft, topRight, bottomRight, color);
 
                 // Baseline
                 Vector3 baselineStart = new Vector3(topLeft.x, m_Transform.TransformPoint(new Vector3(0, cInfo.baseLine, 0)).y, 0);
                 Vector3 baselineEnd = new Vector3(topRight.x, m_Transform.TransformPoint(new Vector3(0, cInfo.baseLine, 0)).y, 0);
 
-                Gizmos.color = Color.cyan;
+                Gizmos.color = UnityEngine.Color.cyan;
                 Gizmos.DrawLine(baselineStart, baselineEnd);
 
 
@@ -131,7 +131,7 @@ namespace TMPro.Examples
                 Vector3 descenderStart = new Vector3(bottomLeft.x, m_Transform.TransformPoint(new Vector3(0, cInfo.descender, 0)).y, 0);
                 Vector3 descenderEnd = new Vector3(bottomRight.x, m_Transform.TransformPoint(new Vector3(0, cInfo.descender, 0)).y, 0);
 
-                Gizmos.color = Color.cyan;
+                Gizmos.color = UnityEngine.Color.cyan;
                 Gizmos.DrawLine(ascenderStart, ascenderEnd);
                 Gizmos.DrawLine(descenderStart, descenderEnd);
 
@@ -140,7 +140,7 @@ namespace TMPro.Examples
                 Vector3 capHeightStart = new Vector3(topLeft.x, m_Transform.TransformPoint(new Vector3(0, capHeight, 0)).y, 0);
                 Vector3 capHeightEnd = new Vector3(topRight.x, m_Transform.TransformPoint(new Vector3(0, capHeight, 0)).y, 0);
 
-                Gizmos.color = Color.cyan;
+                Gizmos.color = UnityEngine.Color.cyan;
                 Gizmos.DrawLine(capHeightStart, capHeightEnd);
 
                 // Draw Centerline
@@ -148,7 +148,7 @@ namespace TMPro.Examples
                 Vector3 centerlineStart = new Vector3(topLeft.x, m_Transform.TransformPoint(new Vector3(0, meanline, 0)).y, 0);
                 Vector3 centerlineEnd = new Vector3(topRight.x, m_Transform.TransformPoint(new Vector3(0, meanline, 0)).y, 0);
 
-                Gizmos.color = Color.cyan;
+                Gizmos.color = UnityEngine.Color.cyan;
                 Gizmos.DrawLine(centerlineStart, centerlineEnd);
 
                 // Draw Origin for each character.
@@ -159,7 +159,7 @@ namespace TMPro.Examples
                 Vector3 originTR = new Vector3(origin.x + gizmoSize, originTL.y, 0);
                 Vector3 originBR = new Vector3(originTR.x, originBL.y, 0);
 
-                Gizmos.color = new Color(1, 0.5f, 0);
+                Gizmos.color = new UnityEngine.Color(1, 0.5f, 0);
                 Gizmos.DrawLine(originBL, originTL);
                 Gizmos.DrawLine(originTL, originTR);
                 Gizmos.DrawLine(originTR, originBR);
@@ -173,7 +173,7 @@ namespace TMPro.Examples
                 Vector3 leftAdvance = new Vector3(xAdvance - gizmoSize, baselineStart.y, 0);
                 Vector3 rightAdvance = new Vector3(xAdvance + gizmoSize, baselineStart.y, 0);
 
-                Gizmos.color = Color.green;
+                Gizmos.color = UnityEngine.Color.green;
                 Gizmos.DrawLine(topAdvance, bottomAdvance);
                 Gizmos.DrawLine(leftAdvance, rightAdvance);
             }
@@ -202,7 +202,7 @@ namespace TMPro.Examples
                 float maxAscender = -Mathf.Infinity;
                 float minDescender = Mathf.Infinity;
 
-                Color wordColor = Color.green;
+                UnityEngine.Color wordColor = UnityEngine.Color.green;
 
                 // Iterate through each character of the word
                 for (int j = 0; j < wInfo.characterCount; j++)
@@ -308,7 +308,7 @@ namespace TMPro.Examples
                 float maxAscender = -Mathf.Infinity;
                 float minDescender = Mathf.Infinity;
 
-                Color32 linkColor = Color.cyan;
+                Color32 linkColor = UnityEngine.Color.cyan;
 
                 // Iterate through each character of the link text
                 for (int j = 0; j < linkInfo.linkTextLength; j++)
@@ -420,23 +420,23 @@ namespace TMPro.Examples
                 Vector3 topRight = m_Transform.TransformPoint(new Vector3(textInfo.characterInfo[lineInfo.lastCharacterIndex].topRight.x, ascender, 0));
                 Vector3 bottomRight = m_Transform.TransformPoint(new Vector3(textInfo.characterInfo[lineInfo.lastCharacterIndex].topRight.x, descender, 0));
 
-                DrawRectangle(bottomLeft, topLeft, topRight, bottomRight, Color.green);
+                DrawRectangle(bottomLeft, topLeft, topRight, bottomRight, UnityEngine.Color.green);
 
                 Vector3 bottomOrigin = m_Transform.TransformPoint(new Vector3(textInfo.characterInfo[lineInfo.firstCharacterIndex].origin, descender, 0));
                 Vector3 topOrigin = m_Transform.TransformPoint(new Vector3(textInfo.characterInfo[lineInfo.firstCharacterIndex].origin, ascender, 0));
                 Vector3 bottomAdvance = m_Transform.TransformPoint(new Vector3(textInfo.characterInfo[lineInfo.firstCharacterIndex].origin + maxAdvance, descender, 0));
                 Vector3 topAdvance = m_Transform.TransformPoint(new Vector3(textInfo.characterInfo[lineInfo.firstCharacterIndex].origin + maxAdvance, ascender, 0));
 
-                DrawDottedRectangle(bottomOrigin, topOrigin, topAdvance, bottomAdvance, Color.green);
+                DrawDottedRectangle(bottomOrigin, topOrigin, topAdvance, bottomAdvance, UnityEngine.Color.green);
 
                 Vector3 baselineStart = m_Transform.TransformPoint(new Vector3(textInfo.characterInfo[lineInfo.firstCharacterIndex].bottomLeft.x, baseline, 0));
                 Vector3 baselineEnd = m_Transform.TransformPoint(new Vector3(textInfo.characterInfo[lineInfo.lastCharacterIndex].topRight.x, baseline, 0));
 
-                Gizmos.color = Color.cyan;
+                Gizmos.color = UnityEngine.Color.cyan;
                 Gizmos.DrawLine(baselineStart, baselineEnd);
 
                 // Draw LineExtents
-                Gizmos.color = Color.grey;
+                Gizmos.color = UnityEngine.Color.grey;
                 Gizmos.DrawLine(m_Transform.TransformPoint(lineInfo.lineExtents.min), m_Transform.TransformPoint(lineInfo.lineExtents.max));
 
                 //}
@@ -472,7 +472,7 @@ namespace TMPro.Examples
             Vector3 bottomLeft = m_TextComponent.transform.position + (meshBounds.center - meshBounds.extents);
             Vector3 topRight = m_TextComponent.transform.position + (meshBounds.center + meshBounds.extents);
 
-            DrawRectangle(bottomLeft, topRight, new Color(1, 0.5f, 0));
+            DrawRectangle(bottomLeft, topRight, new UnityEngine.Color(1, 0.5f, 0));
         }
 
 
@@ -483,12 +483,12 @@ namespace TMPro.Examples
             Vector3 bottomLeft = m_TextComponent.transform.position + (textBounds.center - textBounds.extents);
             Vector3 topRight = m_TextComponent.transform.position + (textBounds.center + textBounds.extents);
 
-            DrawRectangle(bottomLeft, topRight, new Color(0f, 0.5f, 0.5f));
+            DrawRectangle(bottomLeft, topRight, new UnityEngine.Color(0f, 0.5f, 0.5f));
         }
 
 
         // Draw Rectangles
-        void DrawRectangle(Vector3 BL, Vector3 TR, Color color)
+        void DrawRectangle(Vector3 BL, Vector3 TR, UnityEngine.Color color)
         {
             Gizmos.color = color;
 
@@ -500,7 +500,7 @@ namespace TMPro.Examples
 
 
         // Draw Rectangles
-        void DrawRectangle(Vector3 bl, Vector3 tl, Vector3 tr, Vector3 br, Color color)
+        void DrawRectangle(Vector3 bl, Vector3 tl, Vector3 tr, Vector3 br, UnityEngine.Color color)
         {
             Gizmos.color = color;
 
@@ -512,7 +512,7 @@ namespace TMPro.Examples
 
 
         // Draw Rectangles
-        void DrawDottedRectangle(Vector3 bl, Vector3 tl, Vector3 tr, Vector3 br, Color color)
+        void DrawDottedRectangle(Vector3 bl, Vector3 tl, Vector3 tr, Vector3 br, UnityEngine.Color color)
         {
             var cam = Camera.current;
             float dotSpacing = (cam.WorldToScreenPoint(br).x - cam.WorldToScreenPoint(bl).x) / 75f;
