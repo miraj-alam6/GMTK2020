@@ -40,7 +40,7 @@ public class Ball : MonoBehaviour
                 SpawnOntoLevelAgain();
             }           
         }
-        Debug.Log(name);
+        //Debug.Log(name);
         if (_RB2D.velocity.sqrMagnitude > MaxSpeed) {
             _RB2D.velocity = ((_RB2D.velocity.normalized) * MaxSpeed);
         }
