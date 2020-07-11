@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 7869473407318182697}
   - component: {fileID: 539476306241756859}
   - component: {fileID: 6688503099856814737}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Right
   m_TagString: Environment
   m_Icon: {fileID: 0}
@@ -125,7 +125,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -274,7 +274,7 @@ GameObject:
   - component: {fileID: 1645802054852194349}
   - component: {fileID: 8082680878438891368}
   - component: {fileID: 2400836830609680588}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Left
   m_TagString: Environment
   m_Icon: {fileID: 0}
@@ -305,7 +305,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}

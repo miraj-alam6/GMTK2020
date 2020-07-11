@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 50054503613241266}
   - component: {fileID: 8044979519984931918}
   - component: {fileID: 4123688249872596633}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: BallSpawner
   m_TagString: Environment
   m_Icon: {fileID: 0}
