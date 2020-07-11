@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BallAndrew : MonoBehaviour
+public class BallAndrew : ScoreBall
 {
     public float Speed = 5f;
     public float MaxSpeed = 10f;
@@ -10,8 +10,9 @@ public class BallAndrew : MonoBehaviour
 
     private Rigidbody2D _Rigidbody;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         _Rigidbody = GetComponent<Rigidbody2D>();
         transform.right = StartFacing.normalized;
     }
@@ -27,8 +28,9 @@ public class BallAndrew : MonoBehaviour
         MoveBall();
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    protected override void OnTriggerEnter2D(Collider2D other)
     {
+        base.OnTriggerEnter2D(other);
         if (other.CompareTag("Paddle"))     //Add environment
         {
             //set new direction
