@@ -21,4 +21,20 @@ public class ScoreBall : Ball
     protected override void Update() {
         base.Update();
     }
+
+    protected override void OnTriggerEnter2D(Collider2D collision){
+        base.Update();
+        if (collision.tag.Equals(Constants.GOAL_TAG)) {
+            Goal goalComponent = collision.GetComponent<Goal>();
+            if (goalComponent!= null && goalComponent.MyColor != _MyColor) {
+                if (goalComponent.MyColor != _MyColor) {
+                    var teamThatScored = GameController.Instance.GetSpecificTeam(_MyColor);
+                    var otherTeams = GameController.Instance.GetAllTeamsExceptTarget(_MyColor);
+                    teamThatScored.AddAPoint(otherTeams);
+                }
+
+            }
+
+        }
+    }
 }

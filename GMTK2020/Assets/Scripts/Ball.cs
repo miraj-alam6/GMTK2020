@@ -37,4 +37,11 @@ public class Ball : MonoBehaviour
         //TODO Visuals need to turn on, need to probably get spawn locations, maybe from a map class?
     }
 
+
+    protected virtual void OnTriggerEnter2D(Collider2D collision) {
+        if (collision.tag.Equals(Constants.GOAL_TAG)) {
+            Debug.Log(this.name + " just collided with a goal.");
+        }
+    }
+
 }

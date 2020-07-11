@@ -22,9 +22,13 @@ public class GameController : MonoBehaviour{
 
 
     public Team GetSpecificTeam(Paddle paddleOfTeamToExclude) {
+        return GetSpecificTeam(paddleOfTeamToExclude.MyTeam);
+    }
+
+    public Team GetSpecificTeam(GameColor targetTeam) {
         var teamArray = new Team[Teams.Length - 1];
         for (int i = 0; i < Teams.Length; i++) {
-            if (Teams[i].MyTeamType == paddleOfTeamToExclude.MyTeam) {
+            if (Teams[i].MyTeamType == targetTeam) {
                 return Teams[i];
             }
         }
@@ -36,11 +40,15 @@ public class GameController : MonoBehaviour{
         return Teams;
     }
 
-    public Team[] GetAllTeamsExceptTargetPaddle(Paddle paddleOfTeamToExclude) {
+    public Team[] GetAllTeamsExceptTarget(Paddle paddleOfTeamToExclude) {
+        return GetAllTeamsExceptTarget(paddleOfTeamToExclude.MyTeam);
+    }
+
+    public Team[] GetAllTeamsExceptTarget(GameColor teamToExclude) {
         var teamArray = new Team[Teams.Length - 1];
         int j = 0;
-        for (int i=0; i< Teams.Length; i++) {
-            if (Teams[i].MyTeamType != paddleOfTeamToExclude.MyTeam && j < teamArray.Length) {
+        for (int i = 0; i < Teams.Length; i++) {
+            if (Teams[i].MyTeamType != teamToExclude && j < teamArray.Length) {
                 teamArray[j] = Teams[i];
                 j++;
             }

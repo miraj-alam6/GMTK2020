@@ -28,12 +28,12 @@ public class SwitchBall : Ball {
 
     public void ExplodeAndChangeTwoPaddles(Paddle damageInflicter) {
         Explode();
-        var otherTeams = GameController.Instance.GetAllTeamsExceptTargetPaddle(damageInflicter);
+        var otherTeams = GameController.Instance.GetAllTeamsExceptTarget(damageInflicter);
     }
 
     public void ExplodeAndChangeOnePaddle(Paddle damageInflicter) {
         Explode();
-        var otherTeams = GameController.Instance.GetAllTeamsExceptTargetPaddle(damageInflicter);
+        var otherTeams = GameController.Instance.GetAllTeamsExceptTarget(damageInflicter);
     }
 
     private void Explode() {
