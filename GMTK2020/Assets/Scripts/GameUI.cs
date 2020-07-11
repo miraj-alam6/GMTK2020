@@ -6,6 +6,8 @@ using TMPro;
 public class GameUI : MonoBehaviour
 {
 
+    public static GameUI Instance;
+
     public TMP_Text Team1Label;
     public TMP_Text Team1Score;
 
@@ -15,15 +17,13 @@ public class GameUI : MonoBehaviour
     public TMP_Text Team3Label;
     public TMP_Text Team3Score;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+    private void Awake() {
+        Instance = this;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+                
     }
 }

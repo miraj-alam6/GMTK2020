@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Team : MonoBehaviour{
-    public GameColor MyTeamType;
+    public TeamColor MyTeamType;
     //This array should only ever just be a size of two
     public Paddle[] Paddles;
     public int Score;
@@ -25,11 +25,23 @@ public class Team : MonoBehaviour{
 
     public void RemoveAPoint() {
         Score--;
+        if (Score < 0) {
+            Score = 0;
+        }
         //TODO update UI
     }
 
     public void ProcessMoveInputForPaddle(Vector2 moveInput, int paddleIndex) {
         var paddleToMove = Paddles[paddleIndex];
         paddleToMove.ProcessMoveInput(moveInput);
+    }
+
+    public int GetIndexInTeam(Paddle paddle) {
+        for (int i=0; i< Paddles.Length; i++) {
+            if (Paddles[i] == paddle) {
+                return i;
+            }
+        }
+        return -1;
     }
 }
