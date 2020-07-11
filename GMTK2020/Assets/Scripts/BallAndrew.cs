@@ -31,7 +31,7 @@ public class BallAndrew : ScoreBall
     protected override void OnTriggerEnter2D(Collider2D other)
     {
         base.OnTriggerEnter2D(other);
-        if (other.CompareTag("Paddle"))     //Add environment
+        if (other.CompareTag("Paddle") || other.CompareTag("Environment"))     //Add environment
         {
             //set new direction
             // -2*(V dot N)*N + V
