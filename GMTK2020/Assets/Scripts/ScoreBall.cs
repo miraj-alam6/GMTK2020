@@ -62,6 +62,7 @@ public class ScoreBall : Ball
                     var otherTeams = GameController.Instance.GetAllTeamsExceptTarget(_MyColor);
                     teamOfBall.AddAPoint(otherTeams);
                 }
+                Debug.Log("SCORE");
             }
         }
     }
