@@ -27,7 +27,6 @@ public class GameController : MonoBehaviour{
     }
     private void Awake() {
         Instance = this;
-        Time.timeScale = 0.5f;
     }
 
     public void StartAGame() {
