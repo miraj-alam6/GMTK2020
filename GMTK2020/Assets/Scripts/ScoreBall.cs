@@ -4,16 +4,23 @@ using UnityEngine;
 
 public class ScoreBall : Ball
 {
+    public TeamColor StartingColor;
     private TeamColor _MyColor;
 
+
+
+
     public void ChangeColor(Paddle paddleThatHitMe) {
-        _MyColor = paddleThatHitMe.GetTeamColor();
-        Debug.Log("Just changed my color BRAH");
+        if (paddleThatHitMe.GetTeamColor() != _MyColor) {
+            _MyColor = paddleThatHitMe.GetTeamColor();
+            _MySpriteRenderer.color = StaticFunctions.GetUnityColor(_MyColor);
+        }
     }
 
 
     protected override void Awake() {
         base.Awake();
+        _MyColor = StartingColor;
         _MySpriteRenderer.color = StaticFunctions.GetUnityColor(_MyColor);
     }
 
@@ -26,6 +33,13 @@ public class ScoreBall : Ball
     // Update is called once per frame
     protected override void Update() {
         base.Update();
+    }
+
+    protected void OnCollisionEnter2D(Collision2D collision) {
+        if (collision.collider.tag.Equals(Constants.PADDLE_TAG)) {
+            var whoHitMe = collision.collider.GetComponent<Paddle>();
+            ChangeColor(whoHitMe);
+        }
     }
 
     protected override void OnTriggerEnter2D(Collider2D collision){

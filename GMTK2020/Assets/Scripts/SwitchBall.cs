@@ -9,6 +9,7 @@ public class SwitchBall : Ball {
     //This field might not be used based on the design
     public TeamColor MyColor;
     private void Awake() {
+        base.Awake();
         CooldownOnDamageInflictLeft = 0f;
     }
 

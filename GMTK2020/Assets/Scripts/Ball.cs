@@ -7,10 +7,17 @@ public class Ball : MonoBehaviour
     public float TimeBufferToSpawnAgain = 2f;
     public float TimeUntilSpawnAgainLeft;
     private bool _MomentarilyDead = false;
+    public float MaxSpeed = 10f;
 
+    private Rigidbody2D _RB2D;
     protected SpriteRenderer _MySpriteRenderer;
 
     public bool MomentarilyDead { get { return _MomentarilyDead; } }
+
+    protected virtual void Awake() {
+        _MySpriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        _RB2D = GetComponentInChildren<Rigidbody2D>();
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -31,7 +38,11 @@ public class Ball : MonoBehaviour
             TimeUntilSpawnAgainLeft -= Time.deltaTime;
             if (TimeUntilSpawnAgainLeft <= 0) {
                 SpawnOntoLevelAgain();
-            }
+            }           
+        }
+        Debug.Log(name);
+        if (_RB2D.velocity.sqrMagnitude > MaxSpeed) {
+            _RB2D.velocity = ((_RB2D.velocity.normalized) * MaxSpeed);
         }
     }
 
@@ -46,10 +57,4 @@ public class Ball : MonoBehaviour
             Debug.Log(this.name + " just collided with a goal.");
         }
     }
-
-
-    protected virtual void Awake() {
-        _MySpriteRenderer = GetComponentInChildren<SpriteRenderer>();
-    }
-
 }
