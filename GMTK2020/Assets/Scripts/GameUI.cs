@@ -26,4 +26,8 @@ public class GameUI : MonoBehaviour
     {
                 
     }
+
+    public void UpdateScore(int newScore) {
+        
+    }
 }

@@ -7,6 +7,9 @@ public class Ball : MonoBehaviour
     public float TimeBufferToSpawnAgain = 2f;
     public float TimeUntilSpawnAgainLeft;
     private bool _MomentarilyDead = false;
+
+    protected SpriteRenderer _MySpriteRenderer;
+
     public bool MomentarilyDead { get { return _MomentarilyDead; } }
 
     // Start is called before the first frame update
@@ -42,6 +45,11 @@ public class Ball : MonoBehaviour
         if (collision.tag.Equals(Constants.GOAL_TAG)) {
             Debug.Log(this.name + " just collided with a goal.");
         }
+    }
+
+
+    protected virtual void Awake() {
+        _MySpriteRenderer = GetComponentInChildren<SpriteRenderer>();
     }
 
 }

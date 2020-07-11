@@ -5,15 +5,15 @@ using UnityEngine;
 public class ScoreBall : Ball
 {
     private TeamColor _MyColor;
-    private SpriteRenderer _MySpriteRenderer;
 
     public void ChangeColor(Paddle paddleThatHitMe) {
         _MyColor = paddleThatHitMe.GetTeamColor();
         Debug.Log("Just changed my color BRAH");
     }
 
-    private void Awake() {
-        _MySpriteRenderer = GetComponentInChildren<SpriteRenderer>();
+
+    protected override void Awake() {
+        base.Awake();
         _MySpriteRenderer.color = StaticFunctions.GetUnityColor(_MyColor);
     }
 
