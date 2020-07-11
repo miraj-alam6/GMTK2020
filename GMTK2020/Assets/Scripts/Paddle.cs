@@ -8,15 +8,29 @@ public class Paddle : MonoBehaviour{
     private TeamColor _MyTeam;
     private SpriteRenderer _MySpriteRenderer;
     public float Speed;
+    public float ForceMagnitude = 10f;
+    public bool UseFixedAccelaration;
+    public float FixedAcceleration = 10f;
     private Rigidbody2D _RB2D;
+
+    public bool SimpleMovement;
     private void Awake() {
         _MySpriteRenderer = GetComponentInChildren<SpriteRenderer>();
         _MySpriteRenderer.color = StaticFunctions.GetUnityColor(_MyTeam);
         _RB2D = GetComponent<Rigidbody2D>();
     }
     public void ProcessMoveInput(Vector2 inputVector) {
-        Debug.Log("If movement was implemented, this would be the input vector:"+inputVector);
-        _RB2D.velocity = Speed * inputVector;
+        if (SimpleMovement) {
+            _RB2D.velocity = Speed * inputVector;
+        }
+        else {
+            float currentSpeed = _RB2D.velocity.sqrMagnitude;
+            float predictedSpeedNextFrame = (_RB2D.velocity + (inputVector * ForceMagnitude * Time.fixedDeltaTime)/_RB2D.mass).sqrMagnitude;
+            float forceToUse = (UseFixedAccelaration) ? FixedAcceleration * _RB2D.mass : ForceMagnitude;
+            if (predictedSpeedNextFrame < (Speed*Speed)) {
+                _RB2D.AddForce(forceToUse * inputVector, ForceMode2D.Force);
+            }
+        }
     }
 
     public TeamColor GetTeamColor() {
