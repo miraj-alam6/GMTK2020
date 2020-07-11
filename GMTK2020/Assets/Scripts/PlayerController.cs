@@ -17,8 +17,11 @@ public class PlayerController : MonoBehaviour{
     {
 
         //TODO: wsda control first paddle in array
-        
+        var paddle1InputVector = new Vector2(Input.GetAxis("HorizontalOne"), Input.GetAxis("VerticalOne"));
+        var paddle2InputVector = new Vector2(Input.GetAxis("HorizontalTwo"), Input.GetAxis("VerticalTwo"));
+        TeamToControl.ProcessMoveInputForPaddle(paddle1InputVector,0);
+        TeamToControl.ProcessMoveInputForPaddle(paddle2InputVector,1);
         //TODO: arrows control second paddle in array
-        
+
     }
 }
