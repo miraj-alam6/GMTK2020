@@ -43,5 +43,6 @@ public class GameUI : MonoBehaviour
         {
             Team3Score.text = newScore.ToString();
         }
+        Debug.Log(team.ToString() + "TEAM: " + newScore);
     }
 }
