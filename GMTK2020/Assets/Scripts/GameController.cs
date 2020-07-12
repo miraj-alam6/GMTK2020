@@ -33,11 +33,9 @@ public class GameController : MonoBehaviour{
         //How to correctly reset in the game.
         if (GameDone) {
             if (Input.GetKeyDown(KeyCode.R)) {
-                Time.timeScale = 1.0f;
                 SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
             }
             if (Input.GetKeyDown(KeyCode.Q)) {
-                Time.timeScale = 1.0f;
                 //TODO: implement quitting to main menu
             }
 
@@ -45,6 +43,7 @@ public class GameController : MonoBehaviour{
     }
     private void Awake() {
         Instance = this;
+        Time.timeScale = 1f;
     }
 
     public void StartAGame() {
