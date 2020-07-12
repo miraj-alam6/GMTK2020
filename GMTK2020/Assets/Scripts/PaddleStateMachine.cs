@@ -27,7 +27,7 @@ public class PaddleStateMachine : MonoBehaviour {
         StatesList.Add(new TravelState(this));
         StatesList.Add(new WaitState(this));
 
-        Current = StatesList[2];
+        Current = StatesList[0];
         Current.Enter();
     }
 
@@ -40,7 +40,7 @@ public class PaddleStateMachine : MonoBehaviour {
 
         this.Paddle = newPaddle;
         this.GO = newPaddle.gameObject;
-        this.Current = StatesList[2];
+        this.Current = StatesList[0];
     }
 
     // Update is called once per frame

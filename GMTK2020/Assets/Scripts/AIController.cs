@@ -12,11 +12,19 @@ public class AIController : MonoBehaviour
     public List<PaddleStateMachine> BlueSMs;
     public List<PaddleStateMachine> RedSMs;
 
+    public static AIController Instance;
+
     private void Awake()
+    {
+        Instance = this;
+    }
+
+    private void Start()
     {
         for(int i=0; i < BlueTeam.Paddles.Length; i++)
         {
             Paddle paddle = BlueTeam.Paddles[i];
+            Debug.Log(paddle);
             BlueSMs[i].SwapPaddle(paddle);
             BlueSMs[i].WaitTime = PaddleWaitTime;
             paddle.mySM = BlueSMs[i];
@@ -25,6 +33,7 @@ public class AIController : MonoBehaviour
         for (int i = 0; i < RedTeam.Paddles.Length; i++)
         {
             Paddle paddle = RedTeam.Paddles[i];
+            Debug.Log(paddle);
             RedSMs[i].SwapPaddle(paddle);
             RedSMs[i].WaitTime = PaddleWaitTime;
             paddle.mySM = RedSMs[i];
