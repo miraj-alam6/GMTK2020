@@ -17,12 +17,12 @@ public class Team : MonoBehaviour{
         }
         Score++;
 
-        //TODO update UI
         GameUI.Instance.UpdateScore(Score, MyTeamType);
 
         //A tie probably can't even happen anymore because only one score added at a time.
         if (Score >= Constants.SCORE_NEEDED_TO_WIN && Score >highestScoreInOtherTeams) {
             //TODO: Make this team win and end the game
+            GameController.Instance.EndGame(this);
         }
     }
 
@@ -31,6 +31,8 @@ public class Team : MonoBehaviour{
         if (Score < 0) {
             Score = 0;
         }
+        GameUI.Instance.UpdateScore(Score, MyTeamType);
+
         //TODO update UI
     }
 

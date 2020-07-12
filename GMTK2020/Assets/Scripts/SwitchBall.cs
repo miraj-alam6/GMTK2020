@@ -126,4 +126,17 @@ public class SwitchBall : Ball {
             InflictDamage(whoHitMe);
         }
     }
+
+    protected override void OnTriggerEnter2D(Collider2D collision) {
+        base.Update();
+        if (collision.tag.Equals(Constants.GOAL_TAG)) {
+            Goal goalComponent = collision.GetComponent<Goal>();
+            if (goalComponent != null) {
+                var teamOfGoal = GameController.Instance.GetSpecificTeam(goalComponent.MyColor);
+                teamOfGoal.RemoveAPoint();
+                Debug.Log("Opposite of score");
+                Die();
+            }
+        }
+    }
 }

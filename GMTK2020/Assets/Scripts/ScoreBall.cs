@@ -53,16 +53,18 @@ public class ScoreBall : Ball
         base.Update();
         if (collision.tag.Equals(Constants.GOAL_TAG)) {
             Goal goalComponent = collision.GetComponent<Goal>();
-            if (goalComponent!= null && goalComponent.MyColor != _MyColor) {
+            if (goalComponent!= null) {
                 var teamOfBall = GameController.Instance.GetSpecificTeam(_MyColor);
                 if (goalComponent.MyColor == _MyColor) {
                     teamOfBall.RemoveAPoint();
+                    Debug.Log("Opposite of score");
                 }
                 else {
                     var otherTeams = GameController.Instance.GetAllTeamsExceptTarget(_MyColor);
                     teamOfBall.AddAPoint(otherTeams);
+                    Debug.Log("SCORE");
                 }
-                Debug.Log("SCORE");
+                Die();
             }
         }
     }

@@ -20,8 +20,13 @@ public class GameUI : MonoBehaviour
     public TMP_Text Team3Label;
     public TMP_Text Team3Score;
 
+    public GameObject WinPanel;
+    public TMP_Text WinText;
+
+
     private void Awake() {
         Instance = this;
+        WinPanel.SetActive(false);
     }
 
     // Update is called once per frame
@@ -43,5 +48,9 @@ public class GameUI : MonoBehaviour
         {
             Team3Score.text = newScore.ToString();
         }
+    }
+    public void ShowWinPanel(string text) {
+        WinText.text = text;
+        WinPanel.SetActive(true);
     }
 }

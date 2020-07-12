@@ -14,6 +14,8 @@ public class GameController : MonoBehaviour{
     public Paddle DEBUG_PADDLE_THAT_BROKE_BALL;
 
     public BallSpawner[] BallSpawners;
+    public bool GameDone { get; private set;}
+
     private void Update() {
 
         if (DEBUG_TESTING_STUFF) {
@@ -23,8 +25,22 @@ public class GameController : MonoBehaviour{
             }
             //Reset hot key
             if (Input.GetKeyDown(KeyCode.R)) {
+                Time.timeScale = 0f;
                 SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
             }
+        }
+
+        //How to correctly reset in the game.
+        if (GameDone) {
+            if (Input.GetKeyDown(KeyCode.R)) {
+                Time.timeScale = 1.0f;
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
+            }
+            if (Input.GetKeyDown(KeyCode.Q)) {
+                Time.timeScale = 1.0f;
+                //TODO: implement quitting to main menu
+            }
+
         }
     }
     private void Awake() {
@@ -88,4 +104,16 @@ public class GameController : MonoBehaviour{
         }
         return teamArray;
     }   
+    
+    public void EndGame(Team winner) {
+        GameDone = true;
+        if (winner.MyTeamType == TeamColor.Green) {
+            GameUI.Instance.ShowWinPanel("You win");
+        }
+        else{
+            GameUI.Instance.ShowWinPanel("You lose");
+        }
+        Time.timeScale = 0f;
+    }
+
 }

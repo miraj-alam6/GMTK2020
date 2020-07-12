@@ -78,7 +78,8 @@ public class Ball : MonoBehaviour
 
     public void CompleteSpawnOntoLevelAgain(Vector3 exactPosition, Vector3 force) {
         transform.position = exactPosition;
-        _RB2D.AddForce(force);
+        _RB2D.isKinematic = false;
+        _RB2D.AddForce(force, ForceMode2D.Impulse);
     }
 
 
