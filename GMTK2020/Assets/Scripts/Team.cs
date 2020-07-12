@@ -16,7 +16,6 @@ public class Team : MonoBehaviour{
             }
         }
         Score++;
-
         GameUI.Instance.UpdateScore(Score, MyTeamType);
 
         //A tie probably can't even happen anymore because only one score added at a time.
@@ -32,8 +31,6 @@ public class Team : MonoBehaviour{
             Score = 0;
         }
         GameUI.Instance.UpdateScore(Score, MyTeamType);
-
-        //TODO update UI
     }
 
     public void ProcessMoveInputForPaddle(Vector2 moveInput, int paddleIndex) {
