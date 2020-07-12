@@ -32,7 +32,7 @@ public class PaddleStateMachine : MonoBehaviour {
         StatesList.Add(new TravelState(this));
         StatesList.Add(new WaitState(this));
 
-        Current = StatesList[2];
+        Current = StatesList[0];
         Current.Enter(MyTeam, MyPaddle);
     }
 
@@ -45,7 +45,7 @@ public class PaddleStateMachine : MonoBehaviour {
 
         this.Paddle = newPaddle;
         this.GO = newPaddle.gameObject;
-        this.Current = StatesList[2];
+        this.Current = StatesList[0];
     }
 
     // Update is called once per frame
@@ -89,19 +89,28 @@ public class PaddleStateMachine : MonoBehaviour {
         {
             //Get cloest ball
             Collider2D[] colliders = Physics2D.OverlapCircleAll(myPaddle.gameObject.transform.position, 8f, LayerMask.NameToLayer("Ball"));
-            colliders = colliders.Where(c => c.GetComponent<Ball>() != null) as Collider2D[];
+            //colliders = colliders.Where(c => c.gameObject.GetComponent<Ball>() != null) as Collider2D[];
             if(colliders.Length > 0)
             {
                 Collider2D closest = colliders[0];
                 float distance = Vector2.Distance(this.SM.GO.transform.position, closest.transform.position);
                 for(int i=0; i < colliders.Length; i++)
                 {
+                    if(colliders[i].gameObject.GetComponent<Ball>() == null)
+                    {
+                        continue;
+                    }
                     float d = Vector2.Distance(this.SM.GO.transform.position, colliders[i].transform.position);
                     if (d < distance)
                     {
                         distance = d;
                         closest = colliders[i];
                     }
+                }
+
+                if(closest.GetComponent<Ball>() == null)
+                {
+                    return;
                 }
 
                 //Find trajectory of the ball and get a target position based off this

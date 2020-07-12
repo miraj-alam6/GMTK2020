@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class AIController : MonoBehaviour
 {
+    public static AIController Instance;
+
     public float PaddleWaitTime = 1.5f;
 
     public Team BlueTeam;
@@ -14,6 +16,7 @@ public class AIController : MonoBehaviour
 
     private void Awake()
     {
+        Instance = this;
         for (int i = 0; i < RedSMs.Count && i < RedTeam.Paddles.Length; i++) {
             //RedSMs[i].MyTeam = RedTeam;
             //RedSMs[i].MyPaddle = RedTeam.Paddles[i];
