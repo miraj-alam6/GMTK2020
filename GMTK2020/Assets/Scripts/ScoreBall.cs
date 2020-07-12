@@ -43,6 +43,7 @@ public class ScoreBall : Ball
     }
 
     protected void OnCollisionEnter2D(Collision2D collision) {
+        base.OnCollisionEnter2D(collision);
         if (collision.collider.tag.Equals(Constants.PADDLE_TAG)) {
             var whoHitMe = collision.collider.GetComponent<Paddle>();
             ChangeColor(whoHitMe);
@@ -57,12 +58,12 @@ public class ScoreBall : Ball
                 var teamOfBall = GameController.Instance.GetSpecificTeam(_MyColor);
                 if (goalComponent.MyColor == _MyColor) {
                     teamOfBall.RemoveAPoint();
-                    Debug.Log("Opposite of score");
+                  //  Debug.Log("Opposite of score");
                 }
                 else {
                     var otherTeams = GameController.Instance.GetAllTeamsExceptTarget(_MyColor);
                     teamOfBall.AddAPoint(otherTeams);
-                    Debug.Log("SCORE");
+                  //  Debug.Log("SCORE");
                 }
                 Die();
             }

@@ -15,8 +15,27 @@ public class Ball : MonoBehaviour
     protected SpriteRenderer _MySpriteRenderer;
 
     public bool MomentarilyDead { get { return _MomentarilyDead; } }
+    private Animator _Animator;
 
+    public float AnimJustHitCooldown =0.5f;
+    public float AnimJustHitCooldownLeft;
+    public float AnimJustBounceCooldown = 0.5f;
+    public float AnimJustBounceCooldownLeft;
+    public bool AnimExploded;
+
+    //Anim consts
+    const string JUST_HIT = "JustGotHit";
+    const string JUST_BOUNCED = "JustBounced";
+    const string EXPLODED = "Exploded";
+
+    private void ResetAnim() {
+        _Animator.SetBool(JUST_HIT, false);
+        _Animator.SetBool(JUST_BOUNCED, false);
+        _Animator.SetBool(EXPLODED, false);
+    }
     protected virtual void Awake() {
+        _Animator = GetComponent<Animator>();
+        ResetAnim();
         _MySpriteRenderer = GetComponentInChildren<SpriteRenderer>();
         _RB2D = GetComponentInChildren<Rigidbody2D>();
         if (StartDead) {
@@ -32,8 +51,26 @@ public class Ball : MonoBehaviour
 
 
     protected void Die() {
-        //Trigger polish stuff here        
-        CompleteDie();
+        //polish stuff here
+        if (!MomentarilyDead) {
+            AnimExploded = true;
+            if (this is SwitchBall && ((SwitchBall)this).Health <= 0) {
+                _MomentarilyDead = true;
+                _RB2D.isKinematic = true;
+                _RB2D.velocity = Vector3.zero;
+                //Looks complicated but do not cache the cast it can cause control flow to be weird
+                Invoke("CompleteDie", ((SwitchBall)this).SwitchBallDeathAnimationTime);
+            }
+            else {
+                CompleteDie();
+            }
+
+        }
+
+        //Following definitely works, but no final animation for switchball
+        //if (!_MomentarilyDead) {
+        //    CompleteDie();
+        //}
     }
 
     //Called directly at beginning of game, don't want to call normal Die because that will trigger polish effects
@@ -58,6 +95,11 @@ public class Ball : MonoBehaviour
         if (_RB2D.velocity.sqrMagnitude > MaxSpeed) {
             _RB2D.velocity = ((_RB2D.velocity.normalized) * MaxSpeed);
         }
+        _Animator.SetBool(JUST_BOUNCED, AnimJustBounceCooldownLeft > 0);
+        AnimJustBounceCooldownLeft -= Time.deltaTime;
+        _Animator.SetBool(JUST_HIT, AnimJustHitCooldownLeft > 0);
+        AnimJustHitCooldownLeft -= Time.deltaTime;
+        _Animator.SetBool(EXPLODED, AnimExploded);
     }
 
     private void StartSpawnOntoLevelAgain() {
@@ -77,15 +119,21 @@ public class Ball : MonoBehaviour
 
 
     public void CompleteSpawnOntoLevelAgain(Vector3 exactPosition, Vector3 force) {
+        AnimExploded = false;
+        AnimJustHitCooldownLeft = 0f;
+        ResetAnim();
+        AnimJustBounceCooldownLeft = AnimJustBounceCooldown;
         transform.position = exactPosition;
         _RB2D.isKinematic = false;
         _RB2D.AddForce(force, ForceMode2D.Impulse);
     }
 
+    protected virtual void OnCollisionEnter2D(Collision2D collision) {
+        AnimJustBounceCooldownLeft = AnimJustBounceCooldown;
+    }
 
     protected virtual void OnTriggerEnter2D(Collider2D collision) {
         if (collision.tag.Equals(Constants.GOAL_TAG)) {
-            Debug.Log(this.name + " just collided with a goal.");
         }
     }
 }

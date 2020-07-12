@@ -93,6 +93,7 @@ GameObject:
   - component: {fileID: 5379465812207201254}
   - component: {fileID: 5636754104531120949}
   - component: {fileID: 6176999622661185158}
+  - component: {fileID: 3212510348434844414}
   m_Layer: 8
   m_Name: ScoreBall
   m_TagString: Untagged
@@ -131,6 +132,11 @@ MonoBehaviour:
   TimeUntilSpawnAgainLeft: 0
   MaxSpeed: 8
   StartDead: 0
+  AnimJustHitCooldown: 0.5
+  AnimJustHitCooldownLeft: 0
+  AnimJustBounceCooldown: 0.2
+  AnimJustBounceCooldownLeft: 0
+  AnimExploded: 0
   StartingColor: 0
 --- !u!58 &5636754104531120949
 CircleCollider2D:
@@ -169,3 +175,22 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!95 &3212510348434844414
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6297368835273148005}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 22100000, guid: fe7ef5df543efda43b428987954a65a0, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

@@ -21,7 +21,7 @@ public class GameController : MonoBehaviour{
         if (DEBUG_TESTING_STUFF) {
             //Switch paddles hot key
             if (Input.GetKeyDown(KeyCode.C)) {
-                TheSwitchBall.ExplodeAndChangeTwoPaddles(DEBUG_PADDLE_THAT_BROKE_BALL);
+                TheSwitchBall.ChangeTwoPaddles(DEBUG_PADDLE_THAT_BROKE_BALL);
             }
             //Reset hot key
             if (Input.GetKeyDown(KeyCode.R)) {
