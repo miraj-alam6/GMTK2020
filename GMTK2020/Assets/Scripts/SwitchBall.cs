@@ -37,6 +37,7 @@ public class SwitchBall : Ball {
                 //ExplodeAndChangeOnePaddle(1, damageInflicter);
             }
             else {
+                AudioController.Instance.PlaySound(SFXType.SwitchBallHit);
                 AnimJustHitCooldownLeft = AnimJustHitCooldown;
             }
         }
@@ -114,6 +115,7 @@ public class SwitchBall : Ball {
     }
 
     private void Explode() {
+        AudioController.Instance.PlaySound(SFXType.SwitchBallExplode);
         AnimExploded = true;
         Die();
         Health = MaxHealth;
@@ -141,6 +143,7 @@ public class SwitchBall : Ball {
     }
 
     protected override void OnCollisionEnter2D(Collision2D collision) {
+        AudioController.Instance.PlaySound(SFXType.SwitchBallBounce);
         base.OnCollisionEnter2D(collision);
         if (collision.collider.tag.Equals(Constants.PADDLE_TAG)) {
             var whoHitMe = collision.collider.GetComponent<Paddle>();

@@ -7,3 +7,17 @@ public enum TeamColor {
     Red =1,
     Blue =2
 }
+
+public enum SFXType { 
+    None =-1,
+    ScoreBallBounce = 0,
+    ScoreAPoint = 1,
+    SwitchBallBounce =2,
+    SwitchBallHit =3,
+    SwitchBallExplode = 4,
+    YouWinSound=5,
+    YouLoseSound=6,
+    LostAPoint=7,
+    PlayerPointLoss=8,
+    OpponentScore =9
+}

@@ -43,6 +43,7 @@ public class ScoreBall : Ball
     }
 
     protected void OnCollisionEnter2D(Collision2D collision) {
+        AudioController.Instance.PlaySound(SFXType.SwitchBallBounce);
         base.OnCollisionEnter2D(collision);
         if (collision.collider.tag.Equals(Constants.PADDLE_TAG)) {
             var whoHitMe = collision.collider.GetComponent<Paddle>();
