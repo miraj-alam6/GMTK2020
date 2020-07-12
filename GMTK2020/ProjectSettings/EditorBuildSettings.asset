@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/MirajArena.unity
+    guid: daa998f8f2ab62b43aaad1d989ea2da3
   m_configObjects: {}
