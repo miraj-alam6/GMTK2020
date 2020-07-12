@@ -121,9 +121,11 @@ public class GameController : MonoBehaviour{
     public void EndGame(Team winner) {
         GameDone = true;
         if (winner.MyTeamType == TeamColor.Green) {
+            AudioController.Instance.PlaySound(SFXType.YouWinSound);
             GameUI.Instance.ShowWinPanel("You win");
         }
         else{
+            AudioController.Instance.PlaySound(SFXType.YouLoseSound);
             GameUI.Instance.ShowWinPanel("You lose");
         }
         Time.timeScale = 0f;

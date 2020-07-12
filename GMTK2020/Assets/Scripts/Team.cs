@@ -9,6 +9,13 @@ public class Team : MonoBehaviour{
     public int Score;
 
     public void AddAPoint(Team[] otherTeams) {
+        if (MyTeamType == TeamColor.Green) {
+            AudioController.Instance.PlaySound(SFXType.ScoreAPoint);
+        }
+        else {
+            AudioController.Instance.PlaySound(SFXType.OpponentScore);
+        }
+
         int highestScoreInOtherTeams = 0;
         for (int i=0; i < otherTeams.Length; i++) {
             if (otherTeams[i].Score > highestScoreInOtherTeams) {
@@ -26,6 +33,15 @@ public class Team : MonoBehaviour{
     }
 
     public void RemoveAPoint() {
+        AudioController.Instance.PlaySound(SFXType.LostAPoint);
+        if (MyTeamType == TeamColor.Green) {
+            AudioController.Instance.PlaySound(SFXType.PlayerPointLoss);
+        }
+        else {
+            AudioController.Instance.PlaySound(SFXType.LostAPoint);
+
+        }
+        AudioController.Instance.PlaySound(SFXType.LostAPoint);
         Score--;
         if (Score < 0) {
             Score = 0;
