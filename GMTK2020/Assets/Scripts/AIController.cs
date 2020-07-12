@@ -14,26 +14,46 @@ public class AIController : MonoBehaviour
 
     private void Awake()
     {
-        for(int i=0; i < BlueTeam.Paddles.Length; i++)
-        {
-            Paddle paddle = BlueTeam.Paddles[i];
-            BlueSMs[i].SwapPaddle(paddle);
-            BlueSMs[i].WaitTime = PaddleWaitTime;
-            paddle.mySM = BlueSMs[i];
+        for (int i = 0; i < RedSMs.Count && i < RedTeam.Paddles.Length; i++) {
+            //RedSMs[i].MyTeam = RedTeam;
+            //RedSMs[i].MyPaddle = RedTeam.Paddles[i];
+            RedSMs[i].Initialize(RedTeam, RedTeam.Paddles[i]);
+            RedSMs[i].GO = RedTeam.Paddles[i].gameObject;
+        }
+        for (int i = 0; i < BlueSMs.Count && i < BlueTeam.Paddles.Length; i++) {
+            //BlueSMs[i].MyTeam = BlueTeam;
+            //BlueSMs[i].MyPaddle = BlueTeam.Paddles[i];
+            BlueSMs[i].Initialize(BlueTeam, BlueTeam.Paddles[i]);
+            BlueSMs[i].GO = BlueTeam.Paddles[i].gameObject;
         }
 
-        for (int i = 0; i < RedTeam.Paddles.Length; i++)
-        {
-            Paddle paddle = RedTeam.Paddles[i];
-            RedSMs[i].SwapPaddle(paddle);
-            RedSMs[i].WaitTime = PaddleWaitTime;
-            paddle.mySM = RedSMs[i];
-        }
+        //for(int i=0; i < BlueTeam.Paddles.Length; i++)
+        //{
+        //    Paddle paddle = BlueTeam.Paddles[i];
+        //    BlueSMs[i].SwapPaddle(paddle);
+        //    BlueSMs[i].WaitTime = PaddleWaitTime;
+        //    paddle.mySM = BlueSMs[i];
+        //}
+
+        //for (int i = 0; i < RedTeam.Paddles.Length; i++)
+        //{
+        //    Paddle paddle = RedTeam.Paddles[i];
+        //    RedSMs[i].SwapPaddle(paddle);
+        //    RedSMs[i].WaitTime = PaddleWaitTime;
+        //    paddle.mySM = RedSMs[i];
+        //}
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        for (int i=0; i < RedSMs.Count && i < RedTeam.Paddles.Length; i++) {
+            RedSMs[i].MyPaddle = RedTeam.Paddles[i];
+            RedSMs[i].GO = RedTeam.Paddles[i].gameObject;
+        }
+        for (int i = 0; i < BlueSMs.Count && i < BlueTeam.Paddles.Length; i++) {
+            BlueSMs[i].MyPaddle = BlueTeam.Paddles[i];
+            BlueSMs[i].GO = BlueTeam.Paddles[i].gameObject;
+        }
     }
 }

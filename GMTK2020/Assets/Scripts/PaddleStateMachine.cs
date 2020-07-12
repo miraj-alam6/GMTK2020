@@ -5,6 +5,9 @@ using System.Linq;
 
 public class PaddleStateMachine : MonoBehaviour {
 
+
+    public Team MyTeam;
+    public Paddle MyPaddle;
     public int PaddleIndex;
 
     [HideInInspector]
@@ -18,7 +21,9 @@ public class PaddleStateMachine : MonoBehaviour {
     [HideInInspector]
     public float WaitTime;
 
-    public PaddleStateMachine() {
+    public void Initialize(Team team, Paddle paddle) {
+        MyTeam = team;
+        MyPaddle = paddle;
         //this.Paddle = paddle;
         //this.GO = paddle.gameObject;
         StatesList = new List<State>(3);
@@ -28,7 +33,7 @@ public class PaddleStateMachine : MonoBehaviour {
         StatesList.Add(new WaitState(this));
 
         Current = StatesList[2];
-        Current.Enter();
+        Current.Enter(MyTeam, MyPaddle);
     }
 
     public void SwapPaddle(Paddle newPaddle)
@@ -46,7 +51,7 @@ public class PaddleStateMachine : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        Current.Execute();
+        Current?.Execute(MyTeam, MyPaddle);
     }
 
     private State Current;
@@ -56,9 +61,9 @@ public class PaddleStateMachine : MonoBehaviour {
         {
             if (t.Equals(StatesList[i]))
             {
-                Current.Exit();
+                Current.Exit(MyTeam, MyPaddle);
                 Current = StatesList[i];
-                Current.Enter();
+                Current.Enter(MyTeam, MyPaddle);
             }
         }
     }
@@ -67,9 +72,9 @@ public class PaddleStateMachine : MonoBehaviour {
 
         public PaddleStateMachine SM;
 
-        public virtual void Enter() { }
-        public virtual void Execute() { }
-        public virtual void Exit() { }
+        public virtual void Enter(Team myTeam, Paddle myPaddle) { }
+        public virtual void Execute(Team myTeam, Paddle myPaddle) { }
+        public virtual void Exit(Team myTeam, Paddle myPaddle) { }
     };
 
 
@@ -80,10 +85,10 @@ public class PaddleStateMachine : MonoBehaviour {
             this.SM = sm;
         }
         
-        public override void Execute()
+        public override void Execute(Team myTeam, Paddle myPaddle)
         {
             //Get cloest ball
-            Collider2D[] colliders = Physics2D.OverlapCircleAll(this.SM.GO.transform.position, 8f, LayerMask.NameToLayer("Ball"));
+            Collider2D[] colliders = Physics2D.OverlapCircleAll(myPaddle.gameObject.transform.position, 8f, LayerMask.NameToLayer("Ball"));
             colliders = colliders.Where(c => c.GetComponent<Ball>() != null) as Collider2D[];
             if(colliders.Length > 0)
             {
@@ -127,13 +132,16 @@ public class PaddleStateMachine : MonoBehaviour {
             this.SM = sm;
         }
 
-        public override void Enter()
+        public override void Enter(Team myTeam, Paddle myPaddle)
         {
-            myRB = this.SM.GO.GetComponent<Rigidbody2D>();
-            myRB.velocity = (this.SM.TargetPosition - (Vector2)this.SM.GO.transform.position);
+            myRB = myPaddle.gameObject.GetComponent<Rigidbody2D>();
+            //myRB = this.SM.GO.GetComponent<Rigidbody2D>();
+            //myRB.velocity = (this.SM.TargetPosition - (Vector2)this.SM.GO.transform.position);
+            var velocity = (this.SM.TargetPosition - (Vector2)this.SM.GO.transform.position);
+            myPaddle.ProcessMoveInput(velocity.normalized);
         }
 
-        public override void Execute()
+        public override void Execute(Team myTeam, Paddle myPaddle)
         {
             Collider2D[] results = new Collider2D[1];
             if(myRB.OverlapCollider(new ContactFilter2D(), results) > 0 
@@ -154,14 +162,15 @@ public class PaddleStateMachine : MonoBehaviour {
             this.SM = sm;
         }
 
-        public override void Enter()
+        public override void Enter(Team myTeam, Paddle myPaddle)
         {
-            myRB = this.SM.GO.GetComponent<Rigidbody2D>();
-            myRB.velocity = Vector2.zero;
+            //            myRB = this.SM.GO.GetComponent<Rigidbody2D>();
+            //            myRB.velocity = Vector2.zero;
+            myPaddle.ProcessMoveInput(Vector2.zero);
             StartTime = Time.deltaTime;
         }
 
-        public override void Execute()
+        public override void Execute(Team myTeam, Paddle myPaddle)
         {
             if (Time.deltaTime - StartTime >= this.SM.WaitTime)
             {
@@ -169,7 +178,7 @@ public class PaddleStateMachine : MonoBehaviour {
             }
         }
 
-        public override void Exit()
+        public override void Exit(Team myTeam, Paddle myPaddle)
         {
             StartTime = -1;
         }
