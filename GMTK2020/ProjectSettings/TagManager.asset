@@ -9,6 +9,7 @@ TagManager:
   - Paddle
   - Goal
   - Environment
+  - PlayerOnly
   layers:
   - Default
   - TransparentFX
@@ -21,7 +22,7 @@ TagManager:
   - Ball
   - Paddle
   - Wall
-  - 
+  - PlayerOnly
   - 
   - 
   - 

@@ -5,7 +5,6 @@ using UnityEngine;
 public class BallAndrew : ScoreBall
 {
     public float Speed = 5f;
-    public float MaxSpeed = 10f;
     public Vector2 StartFacing = Vector2.down;
 
     private Rigidbody2D _Rigidbody;
