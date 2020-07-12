@@ -16,6 +16,8 @@ public class AudioController : MonoBehaviour{
     public AudioSource YouLoseSound;
     public AudioSource PlayerPointLoss;
     public AudioSource OpponentScore;
+    public AudioSource SpawnerSound;
+
     private void Awake() {
         Instance = this;
     }
@@ -52,6 +54,9 @@ public class AudioController : MonoBehaviour{
                 break;
             case SFXType.OpponentScore:
                 source = OpponentScore;
+                break;
+            case SFXType.SpawnerSound:
+                source = SpawnerSound;
                 break;
             default:
                 sfxType = SFXType.None;

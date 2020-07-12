@@ -35,10 +35,11 @@ public class GameController : MonoBehaviour{
         //How to correctly reset in the game.
         if (GameDone) {
             if (Input.GetKeyDown(KeyCode.R)) {
-                SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
+                SceneManager.LoadScene("MirajArena", LoadSceneMode.Single);
             }
             if (Input.GetKeyDown(KeyCode.Q)) {
                 //TODO: implement quitting to main menu
+                SceneManager.LoadScene("Title", LoadSceneMode.Single);
             }
 
         }

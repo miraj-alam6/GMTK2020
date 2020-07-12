@@ -63,11 +63,13 @@ public class BallSpawner : MonoBehaviour{
         _Animator.SetBool("Red", false);
         _Animator.SetBool("Blue", false);
         _Animator.SetBool("Purple", false);
+        AudioController.Instance.PlaySound(SFXType.SpawnerSound);
         BallAboutToSpawn.CompleteSpawnOntoLevelAgain(_ExactPlaceToSpawnBall.position, HeadingToShootBallOut * ForceToShootBallOutWith);
         BallAboutToSpawn = null;
     }
-    //Following no polish and deprecated
-    public void SpawnABall(Ball ball) {
-        ball.CompleteSpawnOntoLevelAgain(_ExactPlaceToSpawnBall.position, HeadingToShootBallOut * ForceToShootBallOutWith);
-    }
+    ////Following no polish and deprecated
+    //public void DeprecatedSpawnABall(Ball ball) {
+    //    AudioController.Instance.PlaySound(SFXType.SpawnerSound);
+    //    ball.CompleteSpawnOntoLevelAgain(_ExactPlaceToSpawnBall.position, HeadingToShootBallOut * ForceToShootBallOutWith);
+    //}
 }

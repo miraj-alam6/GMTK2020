@@ -19,5 +19,6 @@ public enum SFXType {
     YouLoseSound=6,
     LostAPoint=7,
     PlayerPointLoss=8,
-    OpponentScore =9
+    OpponentScore =9,
+    SpawnerSound = 10
 }
