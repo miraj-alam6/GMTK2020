@@ -90,8 +90,10 @@ public class SwitchBall : Ball {
             //Swap colors.
             var paddleColor = paddle.GetTeamColor();
             paddle.ChangeTeamColor(otherPaddleInTheSwap.GetTeamColor());
-            otherPaddleInTheSwap.ChangeTeamColor(paddleColor);            
+            otherPaddleInTheSwap.ChangeTeamColor(paddleColor);
 
+            paddle.SetIndexInTeam(indexInOtherPaddleTeam);
+            otherPaddleInTheSwap.SetIndexInTeam(indexInPaddleTeam);
         }
         else {
             otherPaddleInTheSwap = null;

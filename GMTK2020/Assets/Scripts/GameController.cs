@@ -44,6 +44,12 @@ public class GameController : MonoBehaviour{
     private void Awake() {
         Instance = this;
         Time.timeScale = 1f;
+        for (int i=0; i < Teams.Length;i++) {
+            var paddles = Teams[i].Paddles;
+            for (int j=0; j < paddles.Length;j++) {
+                paddles[j].SetIndexInTeam(j);
+            }
+        }
     }
 
     public void StartAGame() {

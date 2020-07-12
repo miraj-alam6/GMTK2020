@@ -12,7 +12,8 @@ public class Paddle : MonoBehaviour{
     public bool UseFixedAccelaration;
     public float FixedAcceleration = 10f;
     private Rigidbody2D _RB2D;
-
+    private int IndexInTeam;
+    public SpriteRenderer[] DirectionIcons;
     public bool SimpleMovement;
     private void Awake() {
         _MySpriteRenderer = GetComponentInChildren<SpriteRenderer>();
@@ -30,6 +31,18 @@ public class Paddle : MonoBehaviour{
             if (predictedSpeedNextFrame < (Speed*Speed)) {
                 _RB2D.AddForce(forceToUse * inputVector, ForceMode2D.Force);
             }
+        }
+    }
+
+    public void SetIndexInTeam(int index) {
+        for (int i=0; i < DirectionIcons.Length; i++) {
+            if (i == index) {
+                DirectionIcons[i].enabled = true;
+            }
+            else {
+                DirectionIcons[i].enabled = false;
+            }
+
         }
     }
 
