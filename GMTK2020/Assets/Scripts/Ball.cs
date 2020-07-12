@@ -111,10 +111,8 @@ public class Ball : MonoBehaviour
             GameController.Instance.SpawnASwitchBall((SwitchBall)this);
         }
         else {
-            GameController.Instance.SpawnABall(this);
+            GameController.Instance.SpawnABall(this,1);
         }
-
-        //TODO Visuals need to turn on, need to probably get spawn locations, maybe from a map class?
     }
 
 
