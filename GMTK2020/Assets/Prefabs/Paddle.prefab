@@ -211,7 +211,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _MyTeam: 0
-  Speed: 6
+  Speed: 7
   ForceMagnitude: 50
   UseFixedAccelaration: 1
   FixedAcceleration: 25

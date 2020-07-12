@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 50054503613241266}
   - component: {fileID: 8044979519984931918}
   - component: {fileID: 4123688249872596633}
+  - component: {fileID: 8967150289561656690}
   m_Layer: 10
   m_Name: BallSpawner
   m_TagString: Environment
@@ -127,6 +128,25 @@ MonoBehaviour:
   HeadingToShootBallOut: {x: 1, y: 0, z: 0}
   _ExactPlaceToSpawnBall: {fileID: 8236628677555350278}
   ForceToShootBallOutWith: 50
+--- !u!95 &8967150289561656690
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1326251921171875434}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b18688cd31c55494892124b093fb8271, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &4612242399228775915
 GameObject:
   m_ObjectHideFlags: 0

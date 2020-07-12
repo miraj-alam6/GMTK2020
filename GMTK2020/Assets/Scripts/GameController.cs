@@ -7,7 +7,9 @@ public class GameController : MonoBehaviour{
     public Team[] Teams;
     
     public static GameController Instance;
-    public ScoreBall TheScoreBall;
+    //We will probably have more than one score ball on the field, so I'm commenting this out since no references
+    //in the project 
+    //public ScoreBall TheScoreBall;
     public SwitchBall TheSwitchBall;
 
     public bool DEBUG_TESTING_STUFF;
@@ -21,7 +23,7 @@ public class GameController : MonoBehaviour{
         if (DEBUG_TESTING_STUFF) {
             //Switch paddles hot key
             if (Input.GetKeyDown(KeyCode.C)) {
-                TheSwitchBall.ExplodeAndChangeTwoPaddles(DEBUG_PADDLE_THAT_BROKE_BALL);
+                TheSwitchBall.ChangeTwoPaddles(DEBUG_PADDLE_THAT_BROKE_BALL);
             }
             //Reset hot key
             if (Input.GetKeyDown(KeyCode.R)) {
@@ -43,7 +45,7 @@ public class GameController : MonoBehaviour{
     }
     private void Awake() {
         Instance = this;
-        Time.timeScale = 1f;
+        Time.timeScale = 1.0f;
         for (int i=0; i < Teams.Length;i++) {
             var paddles = Teams[i].Paddles;
             for (int j=0; j < paddles.Length;j++) {
@@ -80,17 +82,23 @@ public class GameController : MonoBehaviour{
         int selector = Random.Range(0, 3);
         TeamColor randomColor = (TeamColor)selector;
         ball.ChangeColor(randomColor);
-        SpawnABall(ball);
+        SpawnABall(ball, (int)randomColor);
     }
 
     public void SpawnASwitchBall(SwitchBall ball) {
-        SpawnABall(ball);
+        SpawnABall(ball, 3);
     }
 
-    public void SpawnABall(Ball ball) {
-        if (BallSpawners.Length > 0) {
-            var randomBallSpawner = BallSpawners[Random.Range(0, BallSpawners.Length)];
-            randomBallSpawner.SpawnABall(ball);
+    public void SpawnABall(Ball ball, int color) {
+        var validSpawners = new List<BallSpawner>();
+        for (int i=0; i < BallSpawners.Length; i++) {
+            if (!BallSpawners[i].AlreadyAboutToSpawnSomething) {
+                validSpawners.Add(BallSpawners[i]);
+            }
+        }
+        if (validSpawners.Count > 0) {
+            var randomBallSpawner = validSpawners[Random.Range(0, validSpawners.Count)];
+            randomBallSpawner.StartSpawnABall(ball,color);
         }
     }
 

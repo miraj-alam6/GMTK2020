@@ -8,30 +8,42 @@ public class SwitchBall : Ball {
     public bool JustGotHit;
     public float CooldownOnDamageInflict = 0.1f;
     private float CooldownOnDamageInflictLeft;
+    public float SwitchBallDeathAnimationTime =1f;
+    public float SwitchBallWhenToSwitchTime = 1f;
+    public float SwitchBallWhenToSwitchTimeLeft = 0f;
+    private Paddle WhoBrokeTheBall;
     //This field might not be used based on the design
     public TeamColor MyColor;
     private void Awake() {
         base.Awake();
         Health = MaxHealth;
         CooldownOnDamageInflictLeft = 0f;
+        SwitchBallWhenToSwitchTimeLeft = 0f;
     }
 
 
     public void InflictDamage(Paddle damageInflicter) {
-        if (CooldownOnDamageInflictLeft <= 0) {
+        if (Health > 0 && CooldownOnDamageInflictLeft <= 0) {
             Health--;
             CooldownOnDamageInflictLeft = CooldownOnDamageInflict;
-            if (Health == 0) {
+            if (Health <= 0) {
+                //uncomment following out
+                Explode();
+                SwitchBallWhenToSwitchTimeLeft = SwitchBallWhenToSwitchTime;
+                WhoBrokeTheBall = damageInflicter;
+                //comment following out TODO: don't call explode here, call it later in update
                 //The two methods exist just so we can test either case with iteration if necessary
-                ExplodeAndChangeTwoPaddles(damageInflicter);
+                //ExplodeAndChangeTwoPaddles(damageInflicter);
                 //ExplodeAndChangeOnePaddle(1, damageInflicter);
+            }
+            else {
+                AnimJustHitCooldownLeft = AnimJustHitCooldown;
             }
         }
 
     }
 
-    public void ExplodeAndChangeTwoPaddles(Paddle damageInflicter) {
-        Explode();
+    public void ChangeTwoPaddles(Paddle damageInflicter) {
         var otherTeams = GameController.Instance.GetAllTeamsExceptTarget(damageInflicter);
         var damageInflictorTeam = GameController.Instance.GetSpecificTeam(damageInflicter);
         List<Paddle> allPaddlesOnTeamOfBallBreaker = new List<Paddle>();
@@ -102,6 +114,7 @@ public class SwitchBall : Ball {
     }
 
     private void Explode() {
+        AnimExploded = true;
         Die();
         Health = MaxHealth;
        //TODO Particle effects
@@ -112,17 +125,23 @@ public class SwitchBall : Ball {
     {
         
     }
-
     // Update is called once per frame
     protected override void Update() {
         base.Update();
         if (CooldownOnDamageInflictLeft > 0) {
             CooldownOnDamageInflictLeft -= Time.deltaTime;
         }
+        if (SwitchBallWhenToSwitchTimeLeft > 0) {
+            SwitchBallWhenToSwitchTimeLeft -= Time.deltaTime;
+            if (SwitchBallWhenToSwitchTimeLeft <= 0) {
+                ChangeTwoPaddles(WhoBrokeTheBall);
+            }
+        }
 
     }
 
-    protected void OnCollisionEnter2D(Collision2D collision) {
+    protected override void OnCollisionEnter2D(Collision2D collision) {
+        base.OnCollisionEnter2D(collision);
         if (collision.collider.tag.Equals(Constants.PADDLE_TAG)) {
             var whoHitMe = collision.collider.GetComponent<Paddle>();
             InflictDamage(whoHitMe);
@@ -136,7 +155,6 @@ public class SwitchBall : Ball {
             if (goalComponent != null) {
                 var teamOfGoal = GameController.Instance.GetSpecificTeam(goalComponent.MyColor);
                 teamOfGoal.RemoveAPoint();
-                Debug.Log("Opposite of score");
                 Die();
             }
         }
