@@ -100,6 +100,13 @@ public class SwitchBall : Ball {
             paddleTeam.Paddles[indexInPaddleTeam] = otherPaddleTeam.Paddles[indexInOtherPaddleTeam];
             otherPaddleTeam.Paddles[indexInOtherPaddleTeam] = tempPaddleReference;
 
+            //swap statemachines
+            if(paddleTeam.MyTeamType == TeamColor.Blue || paddleTeam.MyTeamType == TeamColor.Red)
+            {
+                //swapping prob here
+                //paddle.mySM
+            }
+
             //Swap colors.
             var paddleColor = paddle.GetTeamColor();
             paddle.ChangeTeamColor(otherPaddleInTheSwap.GetTeamColor());
