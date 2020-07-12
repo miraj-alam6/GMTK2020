@@ -11,6 +11,7 @@ public class Paddle : MonoBehaviour{
     public float ForceMagnitude = 10f;
     public bool UseFixedAccelaration;
     public float FixedAcceleration = 10f;
+    [SerializeField]
     private Rigidbody2D _RB2D;
     private int IndexInTeam;
     public SpriteRenderer[] DirectionIcons;

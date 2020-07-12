@@ -215,10 +215,12 @@ MonoBehaviour:
   ForceMagnitude: 50
   UseFixedAccelaration: 1
   FixedAcceleration: 25
+  _RB2D: {fileID: 6858216650987158978}
   DirectionIcons:
   - {fileID: 7782181266389201287}
   - {fileID: 3685559777557105439}
   SimpleMovement: 0
+  mySM: {fileID: 0}
 --- !u!50 &6858216650987158978
 Rigidbody2D:
   serializedVersion: 4
