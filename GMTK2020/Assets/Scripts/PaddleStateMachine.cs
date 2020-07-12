@@ -5,16 +5,22 @@ using System.Linq;
 
 public class PaddleStateMachine : MonoBehaviour {
 
-    public List<State> StatesList;
-    public Paddle Paddle;
-    public GameObject GO;
+    public int PaddleIndex;
 
+    [HideInInspector]
+    public List<State> StatesList;
+    [HideInInspector]
+    public Paddle Paddle;
+    [HideInInspector]
+    public GameObject GO;
+    [HideInInspector]
     public Vector2 TargetPosition = Vector2.zero;
+    [HideInInspector]
     public float WaitTime;
 
-    public PaddleStateMachine(Paddle paddle) {
-        this.Paddle = paddle;
-        this.GO = paddle.gameObject;
+    public PaddleStateMachine() {
+        //this.Paddle = paddle;
+        //this.GO = paddle.gameObject;
         StatesList = new List<State>(3);
 
         StatesList.Add(new SearchState(this));
@@ -23,6 +29,18 @@ public class PaddleStateMachine : MonoBehaviour {
 
         Current = StatesList[2];
         Current.Enter();
+    }
+
+    public void SwapPaddle(Paddle newPaddle)
+    {
+        if (Paddle.GetTeamColor() == TeamColor.Green)
+        {
+            Paddle.mySM = null;
+        }
+
+        this.Paddle = newPaddle;
+        this.GO = newPaddle.gameObject;
+        this.Current = StatesList[2];
     }
 
     // Update is called once per frame
@@ -94,7 +112,6 @@ public class PaddleStateMachine : MonoBehaviour {
 
                 if (this.SM.TargetPosition != Vector2.zero)
                 {
-                    //Exit: should it call itself or should statemachine?
                     this.SM.ChangeState(typeof(TravelState));
                 }
             }

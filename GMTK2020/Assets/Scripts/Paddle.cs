@@ -15,6 +15,7 @@ public class Paddle : MonoBehaviour{
     private int IndexInTeam;
     public SpriteRenderer[] DirectionIcons;
     public bool SimpleMovement;
+    public PaddleStateMachine mySM;
     private void Awake() {
         _MySpriteRenderer = GetComponentInChildren<SpriteRenderer>();
         _MySpriteRenderer.color = StaticFunctions.GetUnityColor(_MyTeam);
